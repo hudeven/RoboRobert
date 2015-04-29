@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <title>Robert</title>
+    
+    <script type="text/javascript" src="/webiopi.js"></script>
+    <script type="text/javascript" src="/button_controller.js"></script>
+    <script type="text/javascript" src="/camera_controller.js"></script>
+
+    <script type="text/javascript">
+      var ie;  
+      var firefox;  
+      if (document.all) ie = true; else ie = false; 
+      document.onkeydown = KeyPress;  
+      document.onkeyup = KeyUp;  
+ 
+      function KeyUp(){ 
+	stop();
+      } 
+      
+      function KeyPress(){  
+       var key;  
+        if (ie) 
+           key = event.keyCode;  
+        else  
+           key = KeyPress.arguments[0].keyCode;  
+	
+	switch(key){
+           case 37:// left
+             turn_left();
+             break;
+           case 38:// up
+             go_forward();
+             break;
+           case 39:// right
+             turn_right();
+             break;
+           case 40:// down
+             go_back();
+             break;
+	   case 13:
+	     stop();
+      }  
+    }
+    </script>
+
+    <style>
+	.camera_button {width: 100px}
+    </style>
+  </head>
+
+  <body>
+
+<center><img src="http://10.0.0.138:8080/?action=stream"></center>
+
+    <div id="box" align="center">
+	<p>Press Arrow key to control</p>
+    </div>
+
+    <div id="speed" align="center">
+	<button onclick="speed_up()">"+"</button>
+	<label>Speed = </label><label id="speed_label"><label>
+	<button onclick="speed_down()">"-"</button>
+    </div>
+
+    <div id="camera">
+	<center>
+	<button onclick="open_camera()" class="camera_button">Open camera</button>
+	<button onclick="close_camera()" class="camera_button">Close camera</button>
+	</center>
+    </div>
+  </body>
+</html>
